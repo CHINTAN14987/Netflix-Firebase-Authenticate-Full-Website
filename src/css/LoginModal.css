@@ -1,0 +1,88 @@
+.login_Container {
+  background-image: url("https://assets.nflxext.com/ffe/siteui/vlv3/5fd505fa-f425-4a18-b3cc-00dd2638f541/d638b1fe-b44f-4cb3-b5d8-2106904c3be0/IN-en-20220704-popsignuptwoweeks-perspective_alpha_website_large.jpg");
+  background-repeat: no-repeat;
+  position: absolute;
+  background-position: center;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  padding: 10em;
+  align-items: center;
+}
+.login_Container .title {
+  font-size: 2em;
+  font-weight: 700;
+  color: white;
+  text-align: left;
+  width: 100%;
+  text-align: left;
+}
+.login_Flex_Container {
+  display: flex;
+  flex-direction: column;
+  background-color: rgba(0, 0, 0, 0.75);
+  width: 25rem;
+  max-width: 100%;
+  align-items: center;
+  justify-content: space-around;
+  height: 35rem;
+  padding: 3rem;
+  border-radius: 4px;
+}
+.login_Container input {
+  background-color: #333;
+  width: 100%;
+
+  padding: 10px;
+  border: transparent;
+  border-radius: 4px;
+  margin-bottom: 1rem;
+}
+
+.login_Container input::placeholder {
+  color: #8c8c8c;
+}
+
+.login_Container button {
+  width: 100%;
+
+  padding: 10px;
+  border: transparent;
+  border-radius: 4px;
+  background-color: #e50914;
+  color: white;
+  font-size: 15px;
+  font-weight: 600;
+  margin: 2rem;
+}
+.Form_Help {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.Form_Help div {
+  color: #8c8c8c;
+}
+
+.SignUp_Link_Title {
+  color: #8c8c8c;
+  font-size: 15px;
+  text-align: left;
+  width: 100%;
+}
+.SignUp_Link_Title span {
+  color: white;
+  font-size: 16px;
+  font-weight: 600;
+}
+.Capcha_link {
+  color: #8c8c8c;
+  font-size: 12px;
+  text-align: left;
+  width: 100%;
+}

@@ -1,0 +1,87 @@
+.signIn_Background_Image {
+  background-image: url("https://assets.nflxext.com/ffe/siteui/vlv3/5fd505fa-f425-4a18-b3cc-00dd2638f541/d638b1fe-b44f-4cb3-b5d8-2106904c3be0/IN-en-20220704-popsignuptwoweeks-perspective_alpha_website_large.jpg");
+  background-repeat: no-repeat;
+  position: absolute;
+  background-position: center;
+  top: -5rem;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  padding: 10em;
+  align-items: center;
+  justify-content: center;
+  border-bottom: 8px solid #222;
+}
+
+.flex_Container_SignIn {
+  display: flex;
+  flex-direction: column;
+
+  align-items: center;
+  justify-content: center;
+  width: 60%;
+  margin-left: auto;
+  margin-right: auto;
+}
+.signIn_Container {
+  position: relative;
+  height: 47rem;
+}
+
+.signIn_Background_Image .title {
+  font-size: 4rem;
+  color: white;
+  font-weight: 700;
+  /* width: 50%;
+  margin-left: auto;
+  margin-right: auto; */
+  margin-bottom: 1rem;
+  text-align: center;
+}
+
+.signIn_Background_Image .subtitle {
+  font-size: 1.6rem;
+  color: white;
+  font-weight: 500;
+  margin-bottom: 1.5rem;
+}
+.card_title-detail {
+  font-size: 1.2rem;
+  color: white;
+  font-weight: 500;
+  margin-bottom: 2rem;
+}
+.signIn_Background_Image input {
+  height: 60px;
+  min-width: 30rem;
+  border: transparent;
+  margin-bottom: 1rem;
+  outline: none;
+  padding-left: 20px;
+}
+.signIn_Background_Image .input_Wrapper {
+  display: flex;
+  flex-wrap: wrap;
+}
+.signIn_Background_Image input::placeholder {
+  color: transparent;
+  text-align: left;
+}
+.signIn_Background_Image input:focus::placeholder {
+  color: #333;
+}
+.signIn_Background_Image button {
+  height: 60px;
+  min-width: 15rem;
+  font-size: 1.6rem;
+  font-weight: 600;
+  background-color: #e50914;
+  color: white;
+  border: transparent;
+  border-left: 1px solid grey;
+  padding: 10px 20px;
+  text-align: center;
+}

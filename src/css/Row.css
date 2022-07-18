@@ -1,0 +1,44 @@
+.row {
+  display: flex;
+  overflow-y: hidden;
+  overflow-x: scroll;
+  height: 45vh;
+  /* padding: 10px; */
+  position: relative;
+}
+
+/* .row img {
+  width: 100%;
+  height: 100%;
+} */
+
+.Row__Img {
+  width: 100%;
+  object-fit: contain;
+  max-height: 400px;
+  transition: transform 450ms;
+  padding: 15px;
+}
+.Row__Img img {
+  height: 100%;
+}
+.Row__Title {
+  color: white;
+  font-size: 18px;
+  margin-left: 15px;
+  margin-bottom: 0;
+}
+
+.Row__Img {
+  transition: transform 450ms;
+  position: relative;
+  z-index: 10;
+}
+
+.row::-webkit-scrollbar {
+  display: none;
+}
+
+.Row__Img:hover {
+  transform: scale(1.2);
+}

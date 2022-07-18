@@ -1,0 +1,151 @@
+.Banner_Container {
+  background-repeat: no-repeat;
+
+  background-size: cover;
+  position: absolute;
+  background-position: center center;
+  top: 0;
+  left: 0%;
+  right: 0;
+  bottom: 0;
+  /* padding: 20px; */
+  padding-right: 0;
+}
+.banner_button_innerWrapper {
+  width: fit-content;
+}
+.banner_button_Wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 1rem;
+}
+.playButton {
+  color: black;
+  background-color: white;
+  padding: 10px 20px;
+  width: 7rem;
+  border: transparent;
+  font-weight: 600;
+  border-radius: 4px;
+  font-size: 18px;
+  margin-bottom: 10px;
+  max-width: 100%;
+}
+.infoButton {
+  background-color: rgba(109, 109, 110, 0.7);
+  color: white;
+  font-size: 18px;
+  padding: 10px 20px;
+  width: 9rem;
+  max-width: 100%;
+  border: transparent;
+  margin-bottom: 10px;
+  font-weight: 600;
+  border-radius: 4px;
+  margin-left: 10px;
+}
+.Banner_Content_FLex {
+  display: flex;
+  flex-direction: column;
+  padding: 20px;
+  padding-right: 0;
+  height: fit-content;
+  /* margin-top: 10rem; */
+  position: absolute;
+  top: 25%;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  width: 100%;
+}
+.Banner_Container__Heading {
+  color: white;
+  font-size: 4rem;
+  margin-bottom: 1rem;
+  width: 50rem;
+  max-width: 100%;
+  font-weight: 900;
+  line-height: 1.2;
+  display: inline;
+}
+.headingChangeColortrue {
+  color: #e50914;
+}
+.Banner_Container_Universal {
+  background-color: rgba(109, 109, 110, 0.7);
+  color: white;
+  font-size: 18px;
+  padding: 5px 10px;
+  width: 10rem;
+  border: transparent;
+  margin-bottom: 10px;
+  font-weight: 600;
+  border-left: 3px solid white;
+  max-width: 100%;
+}
+
+#icon {
+  margin-right: 5px;
+}
+
+.Banner_Container p {
+  color: white;
+  font-size: 20px;
+  font-weight: 500;
+  line-height: 1.2;
+  margin-bottom: 1rem;
+  width: 40rem;
+  max-width: 100%;
+}
+
+.Banner_Container button {
+  margin-bottom: 20px;
+}
+/* .banner_button_Wrapper .hide {
+  display: block;
+} */
+@media only screen and (max-width: 768px) {
+  .Banner_Container p {
+    font-size: 3vw;
+    width: 70%;
+  }
+  .Banner_Container__Heading {
+    font-size: 6vw;
+    width: fit-content;
+  }
+  .Banner_Container {
+    padding: 0;
+  }
+}
+
+@media screen and (max-width: 565px) {
+  .banner_button_Wrapper {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .Banner_Content_FLex {
+    width: 90%;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  .Banner_Container__Heading {
+    font-size: 10vw;
+  }
+  .Banner_Content_FLex p {
+    font-size: 3.5vw;
+    width: 90%;
+  }
+  .infoButton {
+    width: fit-content;
+    padding: 5px;
+  }
+  .playButton {
+    width: fit-content;
+    padding: 5px;
+  }
+  .hide {
+    display: none;
+  }
+}

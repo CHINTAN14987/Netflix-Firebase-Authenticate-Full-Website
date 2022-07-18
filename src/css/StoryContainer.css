@@ -1,0 +1,35 @@
+.Story_FLex_Wrap {
+  display: flex;
+  padding: 70px 45px;
+  background-color: black;
+  align-items: center;
+  width: 70rem;
+  margin: auto;
+  justify-content: space-between;
+}
+/* .Story_SideTVAnimation {
+  flex: 1;
+}
+.card_content {
+  flex: 1;
+} */
+.Story_SideTVAnimation img {
+  width: 100%;
+  height: 100%;
+}
+.Story_Container {
+  background-color: black;
+  border-bottom: 8px solid #222;
+}
+.Story_Container h3 {
+  color: white;
+  font-size: 3.125rem;
+  line-height: 1.1;
+  margin-bottom: 0.5rem;
+}
+
+.Story_Container p {
+  font-size: 1.625rem;
+  font-weight: 400;
+  color: white;
+}
