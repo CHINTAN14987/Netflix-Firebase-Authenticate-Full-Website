@@ -8,42 +8,52 @@ import { BsSearch } from "react-icons/bs";
 import { ImCross } from "react-icons/im";
 import { GoTriangleDown } from "react-icons/go";
 import { setSignOut } from "./features/TokenSlice";
-
+import useDebounce from "./components/hooks/useDebounce";
 const MyNav = () => {
+  const API_KEY = "919bd094f6efdd25c2917fdc4aeae4d9";
   const { pathname } = useLocation();
   const dispatch = useDispatch();
   const [show, handleShow] = useState(false);
   let navigate = useNavigate();
   const [inputOpacity, setInputOpacity] = useState(false);
-  const [inputValue, setInputValue] = useState([]);
+  const [inputValue, setInputValue] = useState("");
   const [dropDown, setDropDown] = useState(false);
+  const [CompressMovieData, setCompressedData] = useState();
+  const debounceSearch = useDebounce(inputValue, 1000);
 
-  const SignUpSuccessful = useSelector((state) => state.token.email);
+  useEffect(() => {
+    const fetchData = async () => {
+      const fetchResponse = await fetch(
+        `https://api.themoviedb.org/3/search/movie?api_key=${API_KEY}&query=${debounceSearch}`
+      );
+      const data = fetchResponse.json();
+      return data;
+    };
+    console.log(debounceSearch);
+    if (debounceSearch) {
+      fetchData().then((response) => {
+        setCompressedData(response);
+        console.log(response.results);
+      });
+    }
+  }, [debounceSearch]);
+
   const opacityHandle = () => {
     setInputOpacity(!inputOpacity);
   };
 
   const SearchHandler = (e) => {
-    setInputValue(e.target.name);
+    setInputValue(e.target.value);
+    if (e.target.value) {
+      navigate("/search", { state: inputValue });
+    } else {
+      navigate("/home");
+    }
   };
   const dropDownHandler = () => {
     setDropDown(!dropDown);
   };
-  // console.log(localStorage.getItem("token").length);
-  // useEffect(() => {
-  //   auth.onAuthStateChanged(async (user) => {
-  //     if (user) {
-  //       dispatch(
-  //         setUserLogin({
-  //           name: user.displayName,
-  //           email: user.email,
-  //           photo: user.photoURL,
-  //         })
-  //       );
-  //       navigate("/home");
-  //     }
-  //   });
-  // }, []);
+
   useEffect(() => {
     window.addEventListener("scroll", scrollFunction);
     return () => {
@@ -58,6 +68,7 @@ const MyNav = () => {
       handleShow(false);
     }
   };
+
   const handleAuth = () => {
     navigate("/login");
   };
@@ -84,6 +95,7 @@ const MyNav = () => {
           src="https://pngimg.com/uploads/netflix/netflix_PNG15.png"
           alt=""
         />
+
         {localStorage.getItem("token") ? (
           <div className="header_Link_Wrapper">
             <div className={`header_link ${dropDown ? "dropDown_FLex" : ""}`}>
@@ -107,6 +119,7 @@ const MyNav = () => {
         )}
       </div>
       <div className="inputWrapper">
+        {console.log(CompressMovieData)}
         {localStorage.getItem("token") ? (
           <></>
         ) : (
