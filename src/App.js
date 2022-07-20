@@ -1,7 +1,6 @@
-import About from "./About";
 import "./App.css";
-import MyNav from "./MyNav";
-import { BrowserRouter, Routes, Route, useNavigate } from "react-router-dom";
+import MyNav from "./components/MyNav";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Home from "./Home";
 import Detail from "./components/Detail";
 import SignIn from "./components/SignIn/SignIn";

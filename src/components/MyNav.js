@@ -1,14 +1,15 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { NavLink } from "react-router-dom";
-import "./css/MyNav.css";
-import { auth } from "./firebase";
-import { useSelector, useDispatch } from "react-redux";
+import "../css/MyNav.css";
+import { auth } from "../firebase";
+import { useDispatch } from "react-redux";
 import { useNavigate, useLocation } from "react-router";
 import { BsSearch } from "react-icons/bs";
 import { ImCross } from "react-icons/im";
 import { GoTriangleDown } from "react-icons/go";
-import { setSignOut } from "./features/TokenSlice";
-import useDebounce from "./components/hooks/useDebounce";
+import { setSignOut } from "../features/TokenSlice";
+import useDebounce from "./hooks/useDebounce";
+import { searchActions } from "../features/searchSlice";
 const MyNav = () => {
   const API_KEY = "919bd094f6efdd25c2917fdc4aeae4d9";
   const { pathname } = useLocation();
@@ -18,8 +19,8 @@ const MyNav = () => {
   const [inputOpacity, setInputOpacity] = useState(false);
   const [inputValue, setInputValue] = useState("");
   const [dropDown, setDropDown] = useState(false);
-  const [CompressMovieData, setCompressedData] = useState();
   const debounceSearch = useDebounce(inputValue, 500);
+  const ref = useRef(null);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -32,10 +33,32 @@ const MyNav = () => {
 
     if (debounceSearch) {
       fetchData().then((response) => {
-        setCompressedData(response.results);
+        dispatch(searchActions.searchFilter(response.results));
+        navigate("/search");
       });
     }
-  }, [debounceSearch]);
+  }, [debounceSearch]); // eslint-disable-line
+
+  useEffect(() => {
+    document.addEventListener("mousedown", handleInputTarget);
+    return () => {
+      document.removeEventListener("mousedown", handleInputTarget);
+    };
+  }, []);
+
+  useEffect(() => {
+    window.addEventListener("scroll", scrollFunction);
+    return () => {
+      window.removeEventListener("scroll", scrollFunction);
+    };
+  }, []);
+
+  const handleInputTarget = (e) => {
+    console.log(e.target);
+    if (!ref?.current?.contains(e.target)) {
+      setInputOpacity(false);
+    }
+  };
 
   const opacityHandle = () => {
     setInputOpacity(!inputOpacity);
@@ -43,21 +66,10 @@ const MyNav = () => {
 
   const SearchHandler = (e) => {
     setInputValue(e.target.value);
-    if (CompressMovieData) {
-      navigate("/search", { state: CompressMovieData });
-    } else {
-      navigate("/home");
-    }
   };
   const dropDownHandler = () => {
     setDropDown(!dropDown);
   };
-  useEffect(() => {
-    window.addEventListener("scroll", scrollFunction);
-    return () => {
-      window.removeEventListener("scroll", scrollFunction);
-    };
-  }, []);
 
   const scrollFunction = () => {
     if (window.scrollY > 100) {
@@ -79,6 +91,7 @@ const MyNav = () => {
   };
   const cancelInput = () => {
     setInputValue("");
+    setInputOpacity(false);
   };
   return (
     <div
@@ -96,7 +109,6 @@ const MyNav = () => {
           src="https://pngimg.com/uploads/netflix/netflix_PNG15.png"
           alt=""
         />
-        {console.log(CompressMovieData)}
 
         {localStorage.getItem("token") ? (
           <div className="header_Link_Wrapper">
@@ -151,6 +163,7 @@ const MyNav = () => {
               {inputOpacity && (
                 <input
                   placeholder="Titles, People, Genres..."
+                  ref={ref}
                   value={inputValue}
                   onChange={SearchHandler}
                 />

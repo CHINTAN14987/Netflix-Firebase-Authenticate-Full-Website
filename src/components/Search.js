@@ -1,77 +1,72 @@
-import React, { useEffect, useState } from "react";
-<<<<<<< HEAD
-import {
-  TrendingRequests,
-  fetchNetflixOriginals,
-  fetchTopRated,
-  fetchActionMovie,
-  fetchComedyMovie,
-  fetchHorrorMovie,
-  fetchRomanceMovie,
-} from "../requests";
-const Search = () => {
-  const [movies, setMovies] = useState([]);
-  useEffect(() => {
-    const fetchData = async () => {
-      const promise = await Promise.all([
-        fetch(TrendingRequests),
-        fetch(fetchNetflixOriginals),
-        fetch(fetchActionMovie),
-        fetch(fetchTopRated),
-        fetch(fetchComedyMovie),
-        fetch(fetchHorrorMovie),
-        fetch(fetchRomanceMovie),
-        fetch(fetchTopRated),
-      ]);
-
-      const data = await Promise.all(
-        promise.map((response) => {
-          return response.json();
-        })
-      );
-      return data;
-    };
-    fetchData().then((r) => {
-      console.log(r);
-      setMovies(r);
-    });
-  }, []);
-  return <div>{console.log(movies)}</div>;
-=======
-import { useLocation } from "react-router-dom";
+import React from "react";
+import { useSelector } from "react-redux";
 import "../css/Search.css";
 
 const Search = () => {
-  const [searchMovies, setSearchMovies] = useState([]);
-  const location = useLocation();
-  useEffect(() => {
-    setSearchMovies(location?.state?.results);
-  }, [location]);
+  const searchData = useSelector((state) => state.search.value);
+
+  const searchTitle = searchData.map((item) => {
+    return item.original_title;
+  });
+  console.log(searchTitle);
+
   return (
     <>
-      {console.log(location)}
-      {searchMovies ? (
-        <div className="serach_Container">
-          <div className="flex_Wrapper_Search">
-            {searchMovies.map((item) => {
-              return (
-                <div key={item.id}>
-                  <img
-                    src={`https://image.tmdb.org/t/p/original/${item.poster_path}`}
-                    alt=""
-                  />
-                </div>
-              );
-            })}
+      {searchData.length > 0 ? (
+        <div className="searchContainer">
+          <div className="title_wrapper">
+            <h3>Explore titles related to:</h3>
+            {searchData.length > 5 ? (
+              <div>
+                {searchTitle.slice(0, 10).map((item, index) => {
+                  return <span key={index}>{item}</span>;
+                })}
+              </div>
+            ) : (
+              <>
+                {searchData.length > 0 && searchData.length < 5 ? (
+                  <span>
+                    {
+                      <>
+                        {searchTitle.map((item, index) => {
+                          return <span key={index}>{item}</span>;
+                        })}
+                      </>
+                    }
+                  </span>
+                ) : (
+                  <></>
+                )}
+              </>
+            )}
           </div>
-          ;
+          {searchData && (
+            <div className="serach_Container">
+              <div className="flex_Wrapper_Search">
+                {searchData?.map((item) => {
+                  return (
+                    <div key={item.id}>
+                      <img
+                        src={`https://image.tmdb.org/t/p/original/${item.poster_path}`}
+                        alt=""
+                      />
+                    </div>
+                  );
+                })}
+              </div>
+              ;
+            </div>
+          )}
         </div>
       ) : (
-        <div>Loading</div>
+        <div className="searchContainer">
+          <h3 className="noneResults">
+            Please Enter Correct Search Term...0 Results Found
+          </h3>
+        </div>
       )}
     </>
   );
->>>>>>> 7187f83d1d89212e2207efd258e59774c8a06a99
 };
 
 export default Search;

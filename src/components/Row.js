@@ -1,9 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import "../css/Row.css";
-import { BsFillHandThumbsUpFill } from "react-icons/bs";
-import { BiPlayCircle } from "react-icons/bi";
-import { FiPauseCircle } from "react-icons/fi";
 
 const Row = ({ title, apiRequest }) => {
   const [movies, setMovies] = useState([]);
@@ -17,7 +14,7 @@ const Row = ({ title, apiRequest }) => {
     api().then((result) => {
       setMovies(result);
     });
-  }, []);
+  }, []); // eslint-disable-line
   const handleClick = (item) => {
     console.log(item);
     navigate(

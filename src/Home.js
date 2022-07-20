@@ -7,6 +7,8 @@ import {
   fetchTopRated,
   fetchComedyMovie,
   fetchHorrorMovie,
+  fetchRomanceMovie,
+  fetchActionMovie,
 } from "./requests";
 import Banner from "./components/Banner";
 import { useNavigate } from "react-router-dom";
@@ -17,18 +19,22 @@ const Home = () => {
     if (isAuth !== null) {
       navigate("/home");
     }
-  }, []);
+  }, []); // eslint-disable-line
   return (
     <>
       <div style={{ height: "80vh", position: "relative" }}>
         <Banner />
       </div>
-      <div style={{ top: "-120px", position: "relative", padding: "20px" }}>
-        <Row title="Trending" apiRequest={TrendingRequests} />
-        <Row title="Netflix Originals" apiRequest={fetchNetflixOriginals} />
-        <Row title="Top Rated Movies" apiRequest={fetchTopRated} />
-        <Row title="Comedy Movies" apiRequest={fetchComedyMovie} />
-        <Row title="Horror Movies" apiRequest={fetchHorrorMovie} />
+      <div>
+        <div style={{ top: "-120px", position: "relative", padding: "20px" }}>
+          <Row title="Trending" apiRequest={TrendingRequests} />
+          <Row title="Netflix Originals" apiRequest={fetchNetflixOriginals} />
+          <Row title="Top Rated Movies" apiRequest={fetchTopRated} />
+          <Row title="Comedy Movies" apiRequest={fetchComedyMovie} />
+          <Row title="Horror Movies" apiRequest={fetchHorrorMovie} />
+          <Row title="Romance Movies" apiRequest={fetchRomanceMovie} />
+          <Row title="Action Movies" apiRequest={fetchActionMovie} />
+        </div>
       </div>
     </>
   );

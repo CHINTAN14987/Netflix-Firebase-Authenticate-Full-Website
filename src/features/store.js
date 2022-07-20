@@ -1,4 +1,7 @@
 import { configureStore } from "@reduxjs/toolkit";
 import TokenReducer from "./TokenSlice";
-const store = configureStore({ reducer: { token: TokenReducer } });
+import searchReducer from "./searchSlice";
+const store = configureStore({
+  reducer: { token: TokenReducer, search: searchReducer },
+});
 export default store;

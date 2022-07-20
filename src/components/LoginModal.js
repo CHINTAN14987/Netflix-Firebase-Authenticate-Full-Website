@@ -1,17 +1,17 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import "../css/LoginModal.css";
 import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
-import { setUserLogin, setSignOut } from "../features/TokenSlice";
-import { useDispatch, useSelector } from "react-redux";
-import { auth, provider } from "../firebase";
+import { setUserLogin } from "../features/TokenSlice";
+import { useDispatch } from "react-redux";
+
 const LoginModal = () => {
   const [loginData, setLoginData] = useState({
     email: "",
     password: "",
     returnSecureToken: true,
   });
-  const [showError, setShowError] = useState("");
+
   let navigate = useNavigate();
   let dispatch = useDispatch();
   const [showEmailerror, setShowEmailError] = useState("");
@@ -20,22 +20,7 @@ const LoginModal = () => {
   const inputDataHandler = (e) => {
     setLoginData({ ...loginData, [e.target.name]: e.target.value });
   };
-  // useEffect(() => {
-  //   auth.onAuthStateChanged(async (user) => {
-  //     if (user) {
-  //       dispatch(
-  //         setUserLogin({
-  //           name: user.displayName,
-  //           email: user.email,
-  //           photo: user.photoURL,
-  //         })
-  //       );
-  //       navigate("/home");
-  //     }
-  //   });
-  // }, []);
 
-  const loginvalue = useSelector((state) => state.token.email);
   const submitHandler = (e) => {
     e.preventDefault();
     signInWithEmailAndPassword(auth, loginData.email, loginData.password)
@@ -51,7 +36,7 @@ const LoginModal = () => {
         );
         localStorage.setItem("token", user.accessToken);
         localStorage.setItem("Name", user.email);
-        navigate("/home", { replace: true });
+        navigate("/home");
       })
 
       .catch((error) => {
@@ -70,8 +55,6 @@ const LoginModal = () => {
         } else {
           setShowPasswordError(editError);
         }
-
-        setShowError(errorCode);
       });
   };
 
