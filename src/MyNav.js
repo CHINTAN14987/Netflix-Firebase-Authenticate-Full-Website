@@ -8,85 +8,50 @@ import { BsSearch } from "react-icons/bs";
 import { ImCross } from "react-icons/im";
 import { GoTriangleDown } from "react-icons/go";
 import { setSignOut } from "./features/TokenSlice";
-import {
-  TrendingRequests,
-  fetchNetflixOriginals,
-  fetchTopRated,
-  fetchActionMovie,
-  fetchComedyMovie,
-  fetchHorrorMovie,
-  fetchRomanceMovie,
-} from "./requests";
-
+import useDebounce from "./components/hooks/useDebounce";
 const MyNav = () => {
+  const API_KEY = "919bd094f6efdd25c2917fdc4aeae4d9";
   const { pathname } = useLocation();
   const dispatch = useDispatch();
   const [show, handleShow] = useState(false);
   let navigate = useNavigate();
   const [inputOpacity, setInputOpacity] = useState(false);
-  const [inputValue, setInputValue] = useState([]);
+  const [inputValue, setInputValue] = useState("");
   const [dropDown, setDropDown] = useState(false);
+  const [CompressMovieData, setCompressedData] = useState();
+  const debounceSearch = useDebounce(inputValue, 500);
 
-  const SignUpSuccessful = useSelector((state) => state.token.email);
+  useEffect(() => {
+    const fetchData = async () => {
+      const fetchResponse = await fetch(
+        `https://api.themoviedb.org/3/search/movie?api_key=${API_KEY}&query=${debounceSearch}`
+      );
+      const data = fetchResponse.json();
+      return data;
+    };
+
+    if (debounceSearch) {
+      fetchData().then((response) => {
+        setCompressedData(response.results);
+      });
+    }
+  }, [debounceSearch]);
+
   const opacityHandle = () => {
     setInputOpacity(!inputOpacity);
   };
 
   const SearchHandler = (e) => {
-    setInputValue(e.target.name);
+    setInputValue(e.target.value);
+    if (CompressMovieData) {
+      navigate("/search", { state: CompressMovieData });
+    } else {
+      navigate("/home");
+    }
   };
   const dropDownHandler = () => {
     setDropDown(!dropDown);
   };
-  // console.log(localStorage.getItem("token").length);
-  // useEffect(() => {
-  //   auth.onAuthStateChanged(async (user) => {
-  //     if (user) {
-  //       dispatch(
-  //         setUserLogin({
-  //           name: user.displayName,
-  //           email: user.email,
-  //           photo: user.photoURL,
-  //         })
-  //       );
-  //       navigate("/home");
-  //     }
-  //   });
-  // }, []);
-  const [movies, setMovies] = useState([]);
-  useEffect(() => {
-    const fetchData = async () => {
-      const promise = await Promise.all([
-        fetch(TrendingRequests),
-        fetch(fetchNetflixOriginals),
-        fetch(fetchActionMovie),
-        fetch(fetchTopRated),
-        fetch(fetchComedyMovie),
-        fetch(fetchHorrorMovie),
-        fetch(fetchRomanceMovie),
-        fetch(fetchTopRated),
-      ]);
-
-      const data = await Promise.all(
-        promise.map((response) => {
-          return response.json();
-        })
-      );
-
-      return data;
-    };
-    fetchData().then((r) => {
-      setMovies([
-        ...r[0].results,
-        ...r[1].results,
-        ...r[2].results,
-        ...r[3].results,
-        ...r[4].results,
-        ...r[5].results,
-        ...r[6].results,
-      ]);
-    });
-  }, []);
   useEffect(() => {
     window.addEventListener("scroll", scrollFunction);
     return () => {
@@ -101,6 +66,7 @@ const MyNav = () => {
       handleShow(false);
     }
   };
+
   const handleAuth = () => {
     navigate("/login");
   };
@@ -111,20 +77,9 @@ const MyNav = () => {
       localStorage.clear();
     });
   };
-  const deBounce = (func) => {
-    let timer;
-    return function (...args) {
-      const context = this;
-      if (timer) clearTimeout(timer);
-      timer = setTimeout(() => {
-        timer = null;
-        func.apply(context, args);
-      }, 3000);
-    };
+  const cancelInput = () => {
+    setInputValue("");
   };
-  {
-    console.log(movies);
-  }
   return (
     <div
       className={`NavContainer ${
@@ -141,6 +96,8 @@ const MyNav = () => {
           src="https://pngimg.com/uploads/netflix/netflix_PNG15.png"
           alt=""
         />
+        {console.log(CompressMovieData)}
+
         {localStorage.getItem("token") ? (
           <div className="header_Link_Wrapper">
             <div className={`header_link ${dropDown ? "dropDown_FLex" : ""}`}>
@@ -199,11 +156,16 @@ const MyNav = () => {
                 />
               )}
               {inputValue.length > 0 && (
-                <ImCross className="icon" color="white" size="10px" />
+                <ImCross
+                  className="icon"
+                  color="white"
+                  size="10px"
+                  onClick={cancelInput}
+                />
               )}
             </div>
             <div className="Name_Logo" onClick={logout}>
-              {localStorage.getItem("Name").length > 0 &&
+              {localStorage.getItem("Name").length &&
                 localStorage.getItem("Name").charAt(0).toUpperCase()}
             </div>
           </>

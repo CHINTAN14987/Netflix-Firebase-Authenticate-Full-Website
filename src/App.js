@@ -7,6 +7,7 @@ import Detail from "./components/Detail";
 import SignIn from "./components/SignIn/SignIn";
 import Signup from "./components/Signup";
 import LoginModal from "./components/LoginModal";
+import Search from "./components/Search";
 import { useSelector } from "react-redux";
 import PrivateRoute from "./components/PrivateRoute";
 function App() {
@@ -35,6 +36,7 @@ function App() {
             />
           </Route>
           <Route path="/login" element={<LoginModal />} />
+          <Route path="/search" element={<Search />} />
         </Routes>
       </BrowserRouter>
     </div>

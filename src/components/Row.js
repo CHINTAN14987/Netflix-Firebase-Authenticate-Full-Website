@@ -37,9 +37,8 @@ const Row = ({ title, apiRequest }) => {
         {movies?.results?.map((item) => {
           const { id, poster_path } = item;
           return (
-            <div className="Row__Img">
+            <div className="Row__Img" key={id}>
               <img
-                key={id}
                 onClick={() => {
                   handleClick(item);
                 }}
