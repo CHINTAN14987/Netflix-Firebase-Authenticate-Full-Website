@@ -8,6 +8,15 @@ import { BsSearch } from "react-icons/bs";
 import { ImCross } from "react-icons/im";
 import { GoTriangleDown } from "react-icons/go";
 import { setSignOut } from "./features/TokenSlice";
+import {
+  TrendingRequests,
+  fetchNetflixOriginals,
+  fetchTopRated,
+  fetchActionMovie,
+  fetchComedyMovie,
+  fetchHorrorMovie,
+  fetchRomanceMovie,
+} from "./requests";
 
 const MyNav = () => {
   const { pathname } = useLocation();
@@ -44,6 +53,40 @@ const MyNav = () => {
   //     }
   //   });
   // }, []);
+  const [movies, setMovies] = useState([]);
+  useEffect(() => {
+    const fetchData = async () => {
+      const promise = await Promise.all([
+        fetch(TrendingRequests),
+        fetch(fetchNetflixOriginals),
+        fetch(fetchActionMovie),
+        fetch(fetchTopRated),
+        fetch(fetchComedyMovie),
+        fetch(fetchHorrorMovie),
+        fetch(fetchRomanceMovie),
+        fetch(fetchTopRated),
+      ]);
+
+      const data = await Promise.all(
+        promise.map((response) => {
+          return response.json();
+        })
+      );
+
+      return data;
+    };
+    fetchData().then((r) => {
+      setMovies([
+        ...r[0].results,
+        ...r[1].results,
+        ...r[2].results,
+        ...r[3].results,
+        ...r[4].results,
+        ...r[5].results,
+        ...r[6].results,
+      ]);
+    });
+  }, []);
   useEffect(() => {
     window.addEventListener("scroll", scrollFunction);
     return () => {
@@ -62,12 +105,26 @@ const MyNav = () => {
     navigate("/login");
   };
   const logout = () => {
-    auth.signOut().then((response) => {
+    auth.signOut().then(() => {
       dispatch(setSignOut());
       navigate("/login");
       localStorage.clear();
     });
   };
+  const deBounce = (func) => {
+    let timer;
+    return function (...args) {
+      const context = this;
+      if (timer) clearTimeout(timer);
+      timer = setTimeout(() => {
+        timer = null;
+        func.apply(context, args);
+      }, 3000);
+    };
+  };
+  {
+    console.log(movies);
+  }
   return (
     <div
       className={`NavContainer ${

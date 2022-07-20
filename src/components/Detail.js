@@ -14,7 +14,6 @@ import YouTube from "react-youtube";
 import Row from "./Row";
 
 const Detail = () => {
-  const { state } = useLocation();
   const [allMovies, setallMovies] = useState([]);
 
   const location = useLocation();
