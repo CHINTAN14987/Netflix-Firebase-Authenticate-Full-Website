@@ -19,7 +19,7 @@ const MyNav = () => {
   const [inputValue, setInputValue] = useState("");
   const [dropDown, setDropDown] = useState(false);
   const [CompressMovieData, setCompressedData] = useState();
-  const debounceSearch = useDebounce(inputValue, 1000);
+  const debounceSearch = useDebounce(inputValue, 500);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -29,11 +29,10 @@ const MyNav = () => {
       const data = fetchResponse.json();
       return data;
     };
-    console.log(debounceSearch);
+
     if (debounceSearch) {
       fetchData().then((response) => {
-        setCompressedData(response);
-        console.log(response.results);
+        setCompressedData(response.results);
       });
     }
   }, [debounceSearch]);
@@ -44,8 +43,8 @@ const MyNav = () => {
 
   const SearchHandler = (e) => {
     setInputValue(e.target.value);
-    if (e.target.value) {
-      navigate("/search", { state: inputValue });
+    if (CompressMovieData) {
+      navigate("/search", { state: CompressMovieData });
     } else {
       navigate("/home");
     }
@@ -79,6 +78,9 @@ const MyNav = () => {
       localStorage.clear();
     });
   };
+  const cancelInput = () => {
+    setInputValue("");
+  };
   return (
     <div
       className={`NavContainer ${
@@ -95,6 +97,7 @@ const MyNav = () => {
           src="https://pngimg.com/uploads/netflix/netflix_PNG15.png"
           alt=""
         />
+        {console.log(CompressMovieData)}
 
         {localStorage.getItem("token") ? (
           <div className="header_Link_Wrapper">
@@ -119,7 +122,6 @@ const MyNav = () => {
         )}
       </div>
       <div className="inputWrapper">
-        {console.log(CompressMovieData)}
         {localStorage.getItem("token") ? (
           <></>
         ) : (
@@ -155,11 +157,16 @@ const MyNav = () => {
                 />
               )}
               {inputValue.length > 0 && (
-                <ImCross className="icon" color="white" size="10px" />
+                <ImCross
+                  className="icon"
+                  color="white"
+                  size="10px"
+                  onClick={cancelInput}
+                />
               )}
             </div>
             <div className="Name_Logo" onClick={logout}>
-              {localStorage.getItem("Name").length > 0 &&
+              {localStorage.getItem("Name").length &&
                 localStorage.getItem("Name").charAt(0).toUpperCase()}
             </div>
           </>
