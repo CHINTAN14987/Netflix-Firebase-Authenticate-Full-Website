@@ -1,6 +1,4 @@
 import React, { useEffect, useState } from "react";
-import { useLocation, useParams } from "react-router-dom";
-import { BsFillHandThumbsUpFill } from "react-icons/bs";
 import { fetchNetflixOriginals } from "../requests";
 import "../css/Banner.css";
 

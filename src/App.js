@@ -3,7 +3,7 @@ import MyNav from "./components/MyNav";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Home from "./Home";
 import Detail from "./components/Detail";
-import SignIn from "./components/SignIn/SignIn";
+import LandingPage from "./components/LandingComponent/LandingPage";
 import Signup from "./components/Signup";
 import LoginModal from "./components/LoginModal";
 import Search from "./components/Search";
@@ -18,7 +18,7 @@ function App() {
         <MyNav />
         {console.log(state)}
         <Routes>
-          <Route path="/" element={<SignIn />} />
+          <Route path="/" element={<LandingPage />} />
           <Route path="/signup" element={<Signup />} />
 
           <Route

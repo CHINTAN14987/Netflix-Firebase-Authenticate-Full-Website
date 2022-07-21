@@ -18,6 +18,7 @@ const MyNav = () => {
   let navigate = useNavigate();
   const [inputOpacity, setInputOpacity] = useState(false);
   const [inputValue, setInputValue] = useState("");
+  const [inputCrossIcon, setInputCrossIcon] = useState(false);
   const [dropDown, setDropDown] = useState(false);
   const debounceSearch = useDebounce(inputValue, 500);
   const ref = useRef(null);
@@ -43,7 +44,7 @@ const MyNav = () => {
     document.addEventListener("mousedown", handleInputTarget);
     return () => {
       document.removeEventListener("mousedown", handleInputTarget);
-    };
+    }; // eslint-disable-next-line
   }, []);
 
   useEffect(() => {
@@ -55,13 +56,17 @@ const MyNav = () => {
 
   const handleInputTarget = (e) => {
     console.log(e.target);
-    if (!ref?.current?.contains(e.target)) {
-      setInputOpacity(false);
+    if (inputValue.length > 0) {
+      if (!ref?.current?.contains(e.target)) {
+        setInputOpacity(false);
+        setInputCrossIcon(false);
+      }
     }
   };
 
   const opacityHandle = () => {
     setInputOpacity(!inputOpacity);
+    setInputCrossIcon(true);
   };
 
   const SearchHandler = (e) => {
@@ -138,7 +143,7 @@ const MyNav = () => {
         ) : (
           <h3
             className={`${
-              pathname === "/login"
+              pathname === "/signup"
                 ? "activebuttonHeading"
                 : "inactivebuttonHeading"
             }`}
@@ -168,7 +173,7 @@ const MyNav = () => {
                   onChange={SearchHandler}
                 />
               )}
-              {inputValue.length > 0 && (
+              {inputValue.length > 0 && inputCrossIcon && (
                 <ImCross
                   className="icon"
                   color="white"

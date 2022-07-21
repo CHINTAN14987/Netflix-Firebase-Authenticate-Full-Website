@@ -91,7 +91,7 @@ const LoginModal = () => {
         </h3>
         <h3 className="Capcha_link">
           This page is protected by Google reCAPTCHA to ensure you're not a bot.
-          Learn more.
+          <span>Learn more.</span>
         </h3>
       </div>
     </div>

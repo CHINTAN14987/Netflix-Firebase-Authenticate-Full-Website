@@ -105,6 +105,16 @@
 /* .banner_button_Wrapper .hide {
   display: block;
 } */
+/* @media only screen and (max-width: 14px) {
+  .Banner_Content_FLex {
+    top: 20%;
+  }
+} */
+@media only screen and (max-width: 1200px) {
+  .Banner_Content_FLex {
+    top: 20%;
+  }
+}
 @media only screen and (max-width: 768px) {
   .Banner_Container p {
     font-size: 3vw;
@@ -147,5 +157,16 @@
   }
   .hide {
     display: none;
+  }
+}
+@media screen and (max-width: 420px) {
+  .Banner_Content_FLex {
+    top: 15%;
+  }
+  .Banner_Content_FLex p {
+    font-size: 4vw;
+  }
+  .Banner_Container__Heading {
+    font-size: 8vw;
   }
 }

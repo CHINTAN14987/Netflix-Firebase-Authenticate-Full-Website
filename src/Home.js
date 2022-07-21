@@ -22,11 +22,11 @@ const Home = () => {
   }, []); // eslint-disable-line
   return (
     <>
-      <div style={{ height: "80vh", position: "relative" }}>
+      <div className="banner_position_Container">
         <Banner />
       </div>
       <div>
-        <div style={{ top: "-120px", position: "relative", padding: "20px" }}>
+        <div className="row_Position_Container">
           <Row title="Trending" apiRequest={TrendingRequests} />
           <Row title="Netflix Originals" apiRequest={fetchNetflixOriginals} />
           <Row title="Top Rated Movies" apiRequest={fetchTopRated} />

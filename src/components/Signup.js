@@ -1,13 +1,10 @@
 import React from "react";
 import { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { TokenActions } from "../features/TokenSlice";
-import store from ".././features/store";
-import { auth } from "../firebase";
+import { setUserLogin } from "../features/TokenSlice";
 import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
 import "../css/Signup.css";
 import { useLocation, useNavigate } from "react-router-dom";
-import { useEffect } from "react";
 
 const Signup = () => {
   let { state } = useLocation();
@@ -30,7 +27,17 @@ const Signup = () => {
     createUserWithEmailAndPassword(auth, signUpData.email, signUpData.password)
       .then((response) => {
         // Signed in
-        console.log(response);
+        let user = response.user;
+
+        dispatch(
+          setUserLogin({
+            name: user.displayName,
+            email: user.email,
+            photo: user.photoURL,
+          })
+        );
+        localStorage.setItem("token", user.accessToken);
+        localStorage.setItem("Name", user.email);
         navigate("/home");
       })
       .catch((error) => {
@@ -93,7 +100,7 @@ const Signup = () => {
           />
           <span className="signup_Error2">{showPasswordError}</span>
 
-          <button onClick={submithandler}>Sign In</button>
+          <button onClick={submithandler}>Sign Up</button>
         </div>
       </div>
     </div>

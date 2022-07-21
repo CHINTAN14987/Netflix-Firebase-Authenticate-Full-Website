@@ -16,6 +16,15 @@
   margin-right: auto;
   font-family: "Graphik-Regular", sans-serif;
 }
+.row_Position_Container {
+  top: -120px;
+  position: relative;
+  padding: 20px;
+}
+.banner_position_Container {
+  height: 80vh;
+  position: relative;
+}
 .heading__Container div {
   flex: 1;
 }

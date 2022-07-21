@@ -20,6 +20,7 @@
   text-align: left;
   width: 100%;
   text-align: left;
+  margin-bottom: 1rem;
 }
 .login_Flex_Container {
   display: flex;
@@ -28,7 +29,6 @@
   width: 25rem;
   max-width: 100%;
   align-items: center;
-  justify-content: space-around;
   height: 35rem;
   padding: 3rem;
   border-radius: 4px;
@@ -36,6 +36,7 @@
 .login_Container input {
   background-color: #333;
   width: 100%;
+  cursor: pointer;
 
   padding: 10px;
   border: transparent;
@@ -57,12 +58,14 @@
   color: white;
   font-size: 15px;
   font-weight: 600;
-  margin: 2rem;
+  margin: 1rem;
+  cursor: pointer;
 }
 .Form_Help {
   display: flex;
   justify-content: space-between;
   width: 100%;
+  margin-bottom: 0.5rem;
 }
 
 .Form_Help div {
@@ -74,6 +77,7 @@
   font-size: 15px;
   text-align: left;
   width: 100%;
+  margin-bottom: 0.5rem;
 }
 .SignUp_Link_Title span {
   color: white;
@@ -85,4 +89,19 @@
   font-size: 12px;
   text-align: left;
   width: 100%;
+}
+
+.login_Container input:focus {
+  outline: 1px solid #e50914;
+}
+
+.Capcha_link span:hover {
+  text-decoration: underline;
+  color: darkblue;
+  cursor: pointer;
+}
+@media screen and (max-width: 786px) {
+  .login_Container {
+    padding: 10rem 1rem 1rem;
+  }
 }

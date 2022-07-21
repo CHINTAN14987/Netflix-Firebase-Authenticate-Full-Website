@@ -1,11 +1,11 @@
-import { type } from "@testing-library/user-event/dist/type";
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import "../../css/SignIn.css";
+import "../../css/LandingPage.css";
 import StoryContainer from "./StoryContainer";
 
 const SignIn = () => {
   const [inputvalue, setInputValue] = useState("");
+  const [warning, setWarning] = useState(false);
   let navigate = useNavigate();
   return (
     <>
@@ -18,11 +18,17 @@ const SignIn = () => {
               Ready to watch? Enter your email to create or restart your
               membership.
             </p>
+            {warning && (
+              <span className="warning_wrapper">
+                Please Enter Email Address
+              </span>
+            )}
             <div className="input_Wrapper">
               <input
                 value={inputvalue}
                 onChange={(e) => {
                   setInputValue(e.target.value);
+                  setWarning(false);
                 }}
                 type="email"
                 required
@@ -33,6 +39,8 @@ const SignIn = () => {
                 onClick={() => {
                   if (inputvalue !== "") {
                     navigate("/signup", { state: inputvalue });
+                  } else {
+                    setWarning(true);
                   }
                 }}
               >

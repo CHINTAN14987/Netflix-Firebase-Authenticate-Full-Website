@@ -3,32 +3,32 @@
   background-repeat: no-repeat;
   position: absolute;
   background-position: center;
-  top: -5rem;
+  top: 0;
   bottom: 0;
   left: 0;
   right: 0;
   z-index: 1;
-  display: flex;
-  flex-direction: column;
   padding: 10em;
-  align-items: center;
-  justify-content: center;
+  padding-top: 0;
   border-bottom: 8px solid #222;
 }
 
 .flex_Container_SignIn {
   display: flex;
   flex-direction: column;
-
   align-items: center;
   justify-content: center;
-  width: 60%;
+  width: 70rem;
+  max-width: 100%;
   margin-left: auto;
   margin-right: auto;
+  /* margin-top: 10rem; */
+  position: relative;
+  top: 30%;
 }
 .signIn_Container {
   position: relative;
-  height: 47rem;
+  height: 100vh;
 }
 
 .signIn_Background_Image .title {
@@ -41,7 +41,12 @@
   margin-bottom: 1rem;
   text-align: center;
 }
-
+.warning_wrapper {
+  color: red;
+  text-align: left;
+  font-weight: 600;
+  font-size: 18px;
+}
 .signIn_Background_Image .subtitle {
   font-size: 1.6rem;
   color: white;
@@ -57,6 +62,7 @@
 .signIn_Background_Image input {
   height: 60px;
   min-width: 30rem;
+
   border: transparent;
   margin-bottom: 1rem;
   outline: none;
@@ -64,7 +70,6 @@
 }
 .signIn_Background_Image .input_Wrapper {
   display: flex;
-  flex-wrap: wrap;
 }
 .signIn_Background_Image input::placeholder {
   color: transparent;
@@ -76,12 +81,40 @@
 .signIn_Background_Image button {
   height: 60px;
   min-width: 15rem;
-  font-size: 1.6rem;
+  font-size: 2rem;
   font-weight: 600;
   background-color: #e50914;
   color: white;
   border: transparent;
   border-left: 1px solid grey;
-  padding: 10px 20px;
   text-align: center;
+}
+@media screen and (max-width: 786px) {
+  .signIn_Background_Image {
+    padding: 1rem 1rem 0 1rem;
+  }
+  .signIn_Background_Image .title {
+    font-size: 3rem;
+  }
+
+  .card_title-detail {
+    text-align: center;
+  }
+
+  .signIn_Background_Image input {
+    min-width: 15rem;
+  }
+  .input_Wrapper button {
+    min-width: 8rem;
+    font-size: 1.5rem;
+  }
+}
+
+@media screen and (max-width: 425px) {
+  .flex_Container_SignIn {
+    margin-top: 2rem;
+  }
+  .input_Wrapper {
+    flex-wrap: wrap;
+  }
 }

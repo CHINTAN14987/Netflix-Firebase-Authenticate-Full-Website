@@ -4,14 +4,17 @@
   background-color: black;
   align-items: center;
   width: 70rem;
+  max-width: 100%;
   margin: auto;
   justify-content: space-between;
+  margin-left: auto;
+  margin-right: auto;
 }
 /* .Story_SideTVAnimation {
-  flex: 1;
+  flex: 1 0 0;
 }
 .card_content {
-  flex: 1;
+  flex: 1 0 0;
 } */
 .Story_SideTVAnimation img {
   width: 100%;
@@ -32,4 +35,11 @@
   font-size: 1.625rem;
   font-weight: 400;
   color: white;
+}
+
+@media screen and (max-width: 786px) {
+  .Story_FLex_Wrap {
+    flex-wrap: wrap;
+    text-align: center;
+  }
 }

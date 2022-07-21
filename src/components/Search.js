@@ -40,16 +40,26 @@ const Search = () => {
               </>
             )}
           </div>
+          {console.log(searchData)}
           {searchData && (
             <div className="serach_Container">
               <div className="flex_Wrapper_Search">
                 {searchData?.map((item) => {
                   return (
                     <div key={item.id}>
-                      <img
-                        src={`https://image.tmdb.org/t/p/original/${item.poster_path}`}
-                        alt=""
-                      />
+                      <>
+                        {item.poster_path ? (
+                          <img
+                            src={`https://image.tmdb.org/t/p/original/${item.poster_path}`}
+                            alt=""
+                          />
+                        ) : (
+                          <img
+                            src={`https://image.tmdb.org/t/p/original/${item.backdrop_path}`}
+                            alt=""
+                          />
+                        )}
+                      </>
                     </div>
                   );
                 })}
