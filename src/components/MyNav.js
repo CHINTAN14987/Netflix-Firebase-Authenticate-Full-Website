@@ -45,7 +45,7 @@ const MyNav = () => {
     return () => {
       document.removeEventListener("mousedown", handleInputTarget);
     }; // eslint-disable-next-line
-  }, []);
+  }, [inputValue]);
 
   useEffect(() => {
     window.addEventListener("scroll", scrollFunction);
