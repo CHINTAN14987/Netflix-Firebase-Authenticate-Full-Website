@@ -59,8 +59,8 @@ const MyNav = () => {
     if (inputValue.length > 0) {
       if (!ref?.current?.contains(e.target)) {
         setInputOpacity(false);
-        setInputCrossIcon(false);
       }
+      setInputCrossIcon(false);
     }
   };
 
