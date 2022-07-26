@@ -63,3 +63,7 @@
 .ytp-pause-overlay .ytp-scroll-min {
   display: none;
 }
+
+.ytp-chrome-top .ytp-show-cards-title {
+  display: none !important;
+}
