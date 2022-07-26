@@ -4,6 +4,7 @@ import "../css/LoginModal.css";
 import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
 import { setUserLogin } from "../features/TokenSlice";
 import { useDispatch } from "react-redux";
+import { useEffect } from "react";
 
 const LoginModal = () => {
   const [loginData, setLoginData] = useState({
@@ -17,6 +18,17 @@ const LoginModal = () => {
   const [showEmailerror, setShowEmailError] = useState("");
   const [showPasswordError, setShowPasswordError] = useState("");
   const auth = getAuth();
+  useEffect(() => {
+    async function getUserInfo() {
+      const token = localStorage.getItem("token");
+      const response = await fetch("https://my-backend.com/user-data", {
+        headers: {
+          Authorization: "Bearer " + token,
+        },
+      });
+      // handle response + response data thereafter
+    }
+  }, []);
   const inputDataHandler = (e) => {
     setLoginData({ ...loginData, [e.target.name]: e.target.value });
   };
@@ -25,6 +37,7 @@ const LoginModal = () => {
     e.preventDefault();
     signInWithEmailAndPassword(auth, loginData.email, loginData.password)
       .then((response) => {
+        console.log(response);
         let user = response.user;
 
         dispatch(

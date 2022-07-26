@@ -45,7 +45,7 @@ const MyNav = () => {
     return () => {
       document.removeEventListener("mousedown", handleInputTarget);
     }; // eslint-disable-next-line
-  }, []);
+  }, [inputValue]);
 
   useEffect(() => {
     window.addEventListener("scroll", scrollFunction);
@@ -55,9 +55,10 @@ const MyNav = () => {
   }, []);
 
   const handleInputTarget = (e) => {
-    console.log(e.target);
+    // console.log(e.target);
     if (inputValue.length > 0) {
       if (!ref?.current?.contains(e.target)) {
+        console.log(!ref?.current?.contains(e.target));
         setInputOpacity(false);
       }
       setInputCrossIcon(false);
