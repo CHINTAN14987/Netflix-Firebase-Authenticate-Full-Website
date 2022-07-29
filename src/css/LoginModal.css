@@ -13,6 +13,24 @@
   padding: 10em;
   align-items: center;
 }
+.login_Container::before{
+  content:"";
+  background-image: linear-gradient(to bottom, rgba(0, 0, 0, 0.9) 0%, rgba(0, 0, 0, 0) 100%);
+  position: absolute;
+    left: 0;
+  right: 0;
+  top:0;
+  height:10vh;
+}
+.login_Form_Wrapper::before{
+  content:"";
+  background-image: linear-gradient(to top, rgba(0, 0, 0, 1) 0%, rgba(0, 0, 0, 0) 100%);
+  position: absolute;
+    bottom: 0;
+  right: 0;
+  left:0;
+  top:0;
+}
 .login_Container .title {
   font-size: 2em;
   font-weight: 700;
@@ -22,6 +40,11 @@
   text-align: left;
   margin-bottom: 1rem;
 }
+.login_Form_Wrapper{
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
 .login_Flex_Container {
   display: flex;
   flex-direction: column;
@@ -29,9 +52,10 @@
   width: 25rem;
   max-width: 100%;
   align-items: center;
-  height: 35rem;
+  height: 30rem;
   padding: 3rem;
   border-radius: 4px;
+  position: relative;
 }
 .login_Container input {
   background-color: #333;
@@ -89,6 +113,7 @@
   font-size: 12px;
   text-align: left;
   width: 100%;
+  margin-top: 0.2rem;
 }
 
 .login_Container input:focus {
@@ -104,4 +129,8 @@
   .login_Container {
     padding: 10rem 1rem 1rem;
   }
+}
+@media screen and (max-width:320px){
+  .login_Flex_Container{padding: 1rem;}
+  
 }

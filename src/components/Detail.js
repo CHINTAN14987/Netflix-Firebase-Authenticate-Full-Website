@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useLocation, useParams } from "react-router-dom";
 import "../css/Detail.css";
-import { BsFillHandThumbsUpFill } from "react-icons/bs";
 import {
   TrendingRequests,
   fetchNetflixOriginals,

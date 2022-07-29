@@ -55,8 +55,6 @@ const Search = () => {
 
   return (
     <>
-      {console.log(selectedImage)}
-      {console.log(youtubeID, "1")}
       {searchData.length ? (
         <div className="searchContainer">
           <div className="title_wrapper">

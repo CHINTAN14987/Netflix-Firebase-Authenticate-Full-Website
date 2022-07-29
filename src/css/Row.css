@@ -2,7 +2,8 @@
   display: flex;
   overflow-y: hidden;
   overflow-x: scroll;
-  height: 45vh;
+  height: 35vh;
+  
   /* padding: 10px; */
   position: relative;
 }

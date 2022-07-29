@@ -18,17 +18,17 @@ const LoginModal = () => {
   const [showEmailerror, setShowEmailError] = useState("");
   const [showPasswordError, setShowPasswordError] = useState("");
   const auth = getAuth();
-  useEffect(() => {
-    async function getUserInfo() {
-      const token = localStorage.getItem("token");
-      const response = await fetch("https://my-backend.com/user-data", {
-        headers: {
-          Authorization: "Bearer " + token,
-        },
-      });
-      // handle response + response data thereafter
-    }
-  }, []);
+  // useEffect(() => {
+  //   async function getUserInfo() {
+  //     const token = localStorage.getItem("token");
+  //     const response = await fetch("https://my-backend.com/user-data", {
+  //       headers: {
+  //         Authorization: "Bearer " + token,
+  //       },
+  //     });
+  //     // handle response + response data thereafter
+  //   }
+  // }, []);
   const inputDataHandler = (e) => {
     setLoginData({ ...loginData, [e.target.name]: e.target.value });
   };
@@ -73,39 +73,42 @@ const LoginModal = () => {
 
   return (
     <div className="login_Container">
-      <div className="login_Flex_Container">
-        <h3 className="title">Sign In</h3>
-        <input
-          placeholder="email or phone number"
-          value={loginData.email}
-          name="email"
-          onChange={inputDataHandler}
-          required
-        />
-        <span className="signup_Error1">{showEmailerror}</span>
-        <input
-          placeholder="password"
-          value={loginData.password}
-          name="password"
-          onChange={inputDataHandler}
-          type="password"
-          required
-        />
-        <span className="signup_Error2">{showPasswordError}</span>
-        <button onClick={submitHandler}>Sign In</button>
-        <div className="Form_Help">
-          <div>Remember me</div>
-          <div>Need help</div>
-        </div>
+      <div className="login_Form_Wrapper">
+        <div className="login_Flex_Container">
+          <h3 className="title">Sign In</h3>
+          <input
+            placeholder="email or phone number"
+            value={loginData.email}
+            name="email"
+            onChange={inputDataHandler}
+            required
+          />
+          <span className="signup_Error1">{showEmailerror}</span>
+          <input
+            placeholder="password"
+            value={loginData.password}
+            name="password"
+            onChange={inputDataHandler}
+            type="password"
+            required
+          />
+          <span className="signup_Error2">{showPasswordError}</span>
+          <button onClick={submitHandler}>Sign In</button>
+          <div className="Form_Help">
+            <div>Remember me</div>
+            <div>Need help</div>
+          </div>
 
-        <h3 className="SignUp_Link_Title">
-          New to Netflix?{" "}
-          <span onClick={() => navigate("/signup")}>Sign up now.</span>
-        </h3>
-        <h3 className="Capcha_link">
-          This page is protected by Google reCAPTCHA to ensure you're not a bot.
-          <span>Learn more.</span>
-        </h3>
+          <h3 className="SignUp_Link_Title">
+            New to Netflix?{" "}
+            <span onClick={() => navigate("/signup")}>Sign up now.</span>
+          </h3>
+          <h3 className="Capcha_link">
+            This page is protected by Google reCAPTCHA to ensure you're not a
+            bot.
+            <span>Learn more.</span>
+          </h3>
+        </div>
       </div>
     </div>
   );

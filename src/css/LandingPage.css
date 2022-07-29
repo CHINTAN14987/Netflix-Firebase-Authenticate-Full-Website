@@ -12,7 +12,24 @@
   padding-top: 0;
   border-bottom: 8px solid #222;
 }
-
+.signIn_Background_Image::before{
+  content:"";
+  background-image: linear-gradient(to bottom, rgba(0, 0, 0, 0.9) 0%, rgba(0, 0, 0, 0) 100%);
+  position: absolute;
+    left: 0;
+  right: 0;
+  top:0;
+height: 10vh;
+}
+.signIn_Background_Image::after{
+  content:"";
+  background-image: linear-gradient(to top, rgba(0, 0, 0, 1) 0%, rgba(0, 0, 0, 0) 100%);
+  position: absolute;
+    left: 0;
+  right: 0;
+  bottom:0;
+  height:10vh;
+}
 .flex_Container_SignIn {
   display: flex;
   flex-direction: column;
