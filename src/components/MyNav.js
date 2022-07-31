@@ -184,7 +184,7 @@ const MyNav = () => {
               )}
             </div>
             <div className="Name_Logo" onClick={logout}>
-              {localStorage.getItem("Name").length &&
+              {localStorage.getItem("Name") &&
                 localStorage.getItem("Name").charAt(0).toUpperCase()}
             </div>
           </>
