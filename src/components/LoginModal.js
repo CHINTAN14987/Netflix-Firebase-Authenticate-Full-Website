@@ -32,7 +32,13 @@ const LoginModal = () => {
   const inputDataHandler = (e) => {
     setLoginData({ ...loginData, [e.target.name]: e.target.value });
   };
+  useEffect(() => {
+    const token = localStorage.getItem("token");
 
+    if (token) {
+      navigate("/home");
+    }
+  }, []);
   const submitHandler = (e) => {
     e.preventDefault();
     signInWithEmailAndPassword(auth, loginData.email, loginData.password)
@@ -73,6 +79,7 @@ const LoginModal = () => {
 
   return (
     <div className="login_Container">
+      {console.log(localStorage.getItem("token"))}
       <div className="login_Form_Wrapper">
         <div className="login_Flex_Container">
           <h3 className="title">Sign In</h3>

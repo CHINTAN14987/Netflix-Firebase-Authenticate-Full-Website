@@ -21,9 +21,7 @@ function App() {
           <Route path="/" element={<LandingPage />} />
           <Route path="/signup" element={<Signup />} />
 
-          <Route
-            element={<PrivateRoute auth={localStorage.getItem("token")} />}
-          >
+          <Route element={<PrivateRoute />}>
             <Route path="/home" element={<Home />} />
             <Route
               path={

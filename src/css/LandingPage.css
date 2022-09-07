@@ -42,6 +42,7 @@ height: 10vh;
   /* margin-top: 10rem; */
   position: relative;
   top: 30%;
+  z-index: 101;
 }
 .signIn_Container {
   position: relative;
